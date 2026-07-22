@@ -617,7 +617,10 @@ html_content = """<!DOCTYPE html>
                     </div>
 
                     <div style="margin-top: 25px; text-align: center;">
-                        <a href="#contact" class="btn btn-primary" style="width: 100%;">Παραγγελια / Αγορα</a>
+                        <!-- Αντικαταστήστε το '#' με το πραγματικό URL του e-shop των Εκδόσεων ΔΕΡΕ ή βιβλιοπωλείου -->
+                        <a href="https://www.ekdoseisdere.gr" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">
+                            Αγορα απο τις Εκδοσεις ΔΕΡΕ
+                        </a>
                     </div>
                 </div>
 
@@ -704,7 +707,7 @@ html_content = """<!DOCTYPE html>
                 <div class="contact-card">
                     <!-- Φόρμα Επικοινωνίας με Web3Forms -->
                     <form action="https://api.web3forms.com/submit" method="POST">
-                        <!-- Αντικαταστήστε το ACCESS_KEY με το δικό σας κλειδί από το web3forms.com -->
+                        <!-- Ενεργό Access Key για Web3Forms -->
                         <input type="hidden" name="access_key" value="e3c89399-ebac-4df6-a8a2-23795a968093">
                         <input type="hidden" name="subject" value="Νέο μήνυμα από την ιστοσελίδα συγγραφέα">
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
@@ -776,4 +779,4 @@ html_content = """<!DOCTYPE html>
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print("Updated index.html created successfully.")
+print("Final index.html created successfully with Web3Forms Access Key and purchase link.")
