@@ -1,0 +1,782 @@
+html_content = """<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Βασίλειος Γεωργιάδης | Συγγραφέας</title>
+    <meta name="description" content="Επίσημη ιστοσελίδα του συγγραφέα Βασίλειου Γεωργιάδη. Ανακαλύψτε το νέο κοινωνικό αστυνομικό μυθιστόρημα «Stella Marina» από τις Εκδόσεις ΔΕΡΕ.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0f141c;
+            --bg-card: #18202c;
+            --bg-surface: #131a24;
+            --accent-gold: #c9a050;
+            --accent-gold-hover: #e0b666;
+            --accent-blue: #3a7bd5;
+            --text-main: #e6ebf2;
+            --text-muted: #94a3b8;
+            --text-dark: #0f141c;
+            --border-color: rgba(201, 160, 80, 0.2);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --max-width: 1140px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, .serif-font {
+            font-family: var(--font-serif);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        /* Layout Helpers */
+        .container {
+            width: 90%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 90px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-subtitle {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 15px auto 0;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 20, 28, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-gold);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(15, 20, 28, 0.6) 0%, rgba(15, 20, 28, 1) 100%),
+                        radial-gradient(circle at 80% 20%, rgba(58, 123, 213, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 20% 80%, rgba(201, 160, 80, 0.08) 0%, transparent 50%);
+            padding-top: 100px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.8rem;
+            line-height: 1.15;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 580px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--text-dark);
+            border: 1px solid var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-gold-hover);
+            border-color: var(--accent-gold-hover);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Book Card / Visual */
+        .book-preview-card {
+            position: relative;
+            text-align: center;
+        }
+
+        .book-img-wrapper {
+            position: relative;
+            display: inline-block;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .book-img-wrapper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -10px rgba(201, 160, 80, 0.2);
+        }
+
+        .book-cover-img {
+            max-width: 100%;
+            width: 320px;
+            height: auto;
+            display: block;
+            background-color: var(--bg-card);
+        }
+
+        /* Book Feature Section */
+        .book-details-grid {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .book-meta-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 30px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+
+        .book-meta-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            font-size: 0.95rem;
+        }
+
+        .book-meta-item:last-child {
+            border-bottom: none;
+        }
+
+        .book-meta-label {
+            color: var(--text-muted);
+        }
+
+        .book-meta-value {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .synopsis-block {
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-gold);
+            padding: 35px;
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 40px;
+        }
+
+        .synopsis-block h3 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .synopsis-text p {
+            margin-bottom: 18px;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        .author-note-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 4px;
+            margin-top: 40px;
+        }
+
+        .author-note-box h4 {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+
+        .author-note-box blockquote {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #ffffff;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        /* Author Section */
+        .author-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .author-portrait-container {
+            text-align: center;
+        }
+
+        .author-portrait {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 4px;
+            filter: grayscale(20%);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transition: var(--transition);
+        }
+
+        .author-portrait:hover {
+            filter: grayscale(0%);
+        }
+
+        .author-bio-content h3 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .author-subtitle {
+            color: var(--accent-gold);
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .author-bio-content p {
+            margin-bottom: 20px;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 50px;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-subtle);
+            border-radius: 2px;
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(201, 160, 80, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* Footer */
+        footer {
+            background: #090c11;
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-grid, .book-details-grid, .author-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .book-img-wrapper {
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-card);
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .contact-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Β. <span>ΓΕΩΡΓΙΑΔΗΣ</span></a>
+            <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Μενού">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Αρχικη</a></li>
+                <li><a href="#book">Το Βιβλιο</a></li>
+                <li><a href="#author">Ο Συγγραφεας</a></li>
+                <li><a href="#contact">Επικοινωνια</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <span class="section-subtitle">Κοινωνικο Αστυνομικο Μυθιστορημα</span>
+                    <h1>Βασίλειος Γεωργιάδης</h1>
+                    <p class="hero-tagline">«Στα σκοτεινά νερά της πάντοτε μυστηριακής Θεσσαλονίκης...»</p>
+                    <p class="hero-description">
+                        Ιστορίες εμπνευσμένες από την πραγματικότητα, τα ανθρώπινα όρια και τις σιωπές που σημαδεύουν τη σύγχρονη κοινωνία.
+                    </p>
+                    <div class="btn-group">
+                        <a href="#book" class="btn btn-primary">Ανακαλυψτε το Stella Marina</a>
+                        <a href="#contact" class="btn btn-outline">Επικοινωνια</a>
+                    </div>
+                </div>
+                <div class="book-preview-card">
+                    <div class="book-img-wrapper">
+                        <!-- Αντικαταστήστε τη διαδρομή εικόνας με τη δική σας: images/stellamarinacover.jpg -->
+                        <img src="images/stellamarinacover.jpg" alt="Εξώφυλλο Stella Marina" class="book-cover-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/320x480/18202c/c9a050?text=Stella+Marina+Cover';">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Section -->
+    <section id="book">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Νεα Κυκλοφορια</span>
+                <h2 class="section-title">Stella Marina</h2>
+            </div>
+
+            <div class="book-details-grid">
+                <!-- Book Left Column: Cover & Quick Details -->
+                <div>
+                    <div class="book-img-wrapper" style="display: block; text-align: center;">
+                        <img src="images/stellamarinacover.jpg" alt="Stella Marina" class="book-cover-img" style="margin: 0 auto;" onerror="this.onerror=null; this.src='https://via.placeholder.com/320x480/18202c/c9a050?text=Stella+Marina+Cover';">
+                    </div>
+                    
+                    <div class="book-meta-box">
+                        <div class="book-meta-item">
+                            <span class="book-meta-label">Τίτλος:</span>
+                            <span class="book-meta-value">Stella Marina</span>
+                        </div>
+                        <div class="book-meta-item">
+                            <span class="book-meta-label">Συγγραφέας:</span>
+                            <span class="book-meta-value">Βασίλειος Γεωργιάδης</span>
+                        </div>
+                        <div class="book-meta-item">
+                            <span class="book-meta-label">Εκδόσεις:</span>
+                            <span class="book-meta-value">ΔΕΡΕ</span>
+                        </div>
+                        <div class="book-meta-item">
+                            <span class="book-meta-label">Είδος:</span>
+                            <span class="book-meta-value">Κοινωνικό Αστυνομικό</span>
+                        </div>
+                        <div class="book-meta-item">
+                            <span class="book-meta-label">Τόπος Πλοκής:</span>
+                            <span class="book-meta-value">Θεσσαλονίκη</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 25px; text-align: center;">
+                        <a href="#contact" class="btn btn-primary" style="width: 100%;">Παραγγελια / Αγορα</a>
+                    </div>
+                </div>
+
+                <!-- Book Right Column: Synopsis & Author Note -->
+                <div>
+                    <div class="synopsis-block">
+                        <h3>Η Υπόθεση</h3>
+                        <div class="synopsis-text">
+                            <p>
+                                Η Στέλλα Ελευθερίου, μια νέα υπαστυνόμος στο Τμήμα Καταπολέμησης Εμπορίας Ανθρώπων, καλείται να ισορροπήσει σε ένα εξαιρετικά ευαίσθητο περιβάλλον. Η υπόθεση εξαφάνισης μιας «γυναικείας σκιάς της νύχτας» φαίνεται αρχικά τυπική και αδιάφορη. Γρήγορα όμως, μετατρέπεται σε έναν ανεμοστρόβιλο που φέρνει στην επιφάνεια ανεξέλεγκτα πάθη και μια αλήθεια που όλοι γνώριζαν, αλλά κανείς δεν τολμούσε να προφέρει.
+                            </p>
+                            <p>
+                                Έχοντας στο πλευρό της τον Στέφανο Βαρδάρη, έναν μπαρουτοκαπνισμένο αστυνομικό που γνωρίζει τους άγραφους νόμους του δρόμου, η Στέλλα θα βυθιστεί σε ένα πλέγμα σιωπής, φόβου και διαπλοκής. Εδάφη ακανθώδη, όπου η γραμμή ανάμεσα στο καθήκον, τη δικαιοσύνη και την ανθρώπινη αξιοπρέπεια δοκιμάζεται σκληρά.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="author-note-box">
+                        <h4>Σημείωμα του Συγγραφέα</h4>
+                        <blockquote>«Δεν γράφω για να φανταστώ έναν άλλο κόσμο. Γράφω επειδή τον έχω δει.»</blockquote>
+                        
+                        <p style="color: #cbd5e1; margin-bottom: 15px;">
+                            Το <em>Stella Marina</em> δεν είναι απλώς μια ιστορία μυθοπλασίας. Είναι ένα ψηφιδωτό από αληθινές ανάσες, βλέμματα που απέφυγαν να συναντήσουν το δικό σου, και σιωπές που πλήγωσαν όσο και οι πράξεις. Έχω υπάρξει θεατής, καταγραφέας, παρών — κι αυτό το «παρών» δεν σε αφήνει ποτέ να ξεχάσεις.
+                        </p>
+                        <p style="color: #cbd5e1; margin-bottom: 15px;">
+                            Γυναίκες που επιβίωσαν. Παιδιά που χάθηκαν. Άνθρωποι που τόλμησαν να πουν «όχι», πληρώνοντάς το με ολόκληρη τη ζωή τους. Η Στέλλα, ο Στέφανος, ο Μιχάλης, η Διευθύντρια, η Ελισάβετ είναι άνθρωποι που γνώρισα.
+                        </p>
+                        <p style="color: #cbd5e1; margin-bottom: 15px;">
+                            <strong>Stella Marina σημαίνει Αστερίας.</strong> Είναι η μνήμη εκείνων που έμειναν στο περιθώριο. Είναι το σύμβολο μιας μάχης που δίνεται αθόρυβα, καθημερινά, εκεί που κρύφτηκε ένα παιδί και σώθηκε μια ψυχή.
+                        </p>
+                        <p style="color: var(--accent-gold); font-weight: 500; font-style: italic; margin-top: 20px;">
+                            Στο όνομα όλων των ανυπεράσπιστων αστεριών, για κάθε παιδί που μια μέρα θα φωνάξει: «Θα φωνάξω την αστυνομία» — και εκείνη θα είναι εκεί.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Section -->
+    <section id="author">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Βιογραφικο</span>
+                <h2 class="section-title">Ο Συγγραφέας</h2>
+            </div>
+
+            <div class="author-grid">
+                <div class="author-portrait-container">
+                    <!-- Διαδρομή φωτογραφίας: images/author-portrait.jpg -->
+                    <img src="images/author-portrait.jpg" alt="Βασίλειος Γεωργιάδης" class="author-portrait" onerror="this.onerror=null; this.src='https://via.placeholder.com/380x480/18202c/c9a050?text=Βασίλειος+Γεωργιάδης';">
+                </div>
+
+                <div class="author-bio-content">
+                    <h3>Βασίλειος Γεωργιάδης</h3>
+                    <span class="author-subtitle">Συγγραφέας • Θεσσαλονίκη</span>
+
+                    <p>
+                        Ο <strong>Βασίλειος Γεωργιάδης</strong> γεννήθηκε και ζει στη Θεσσαλονίκη. 
+                    </p>
+                    <p>
+                        Η επαγγελματική του πορεία στον τομέα της επιβολής του νόμου, της συνοριακής φύλαξης και της διεθνούς επιχειρησιακής εκπαίδευσης του προσέφερε μια σπάνια και ουσιαστική οπτική στον ψυχισμό των ανθρώπων. Έχοντας εργαστεί σε απαιτητικά, πολυπολιτισμικά περιβάλλοντα και έχοντας εκπαιδεύσει στελέχη από όλη την Ευρώπη, η καθημερινή παρατήρηση της ανθρώπινης αντοχής, των καταστάσεων κρίσης και των διαπροσωπικών σχέσεων αποτελεί τον κεντρικό πυρήνα της έμπνευσής του.
+                    </p>
+                    <p>
+                        Ως συγγραφέας, υπηρετεί το <strong>κοινωνικό αστυνομικό μυθιστόρημα</strong>, πλάθοντας ιστορίες που βασίζονται σε πραγματικά ερεθίσματα. Στα κείμενά του, η μυστήρια πλοκή συμπλέκεται με την ψυχογραφία των χαρακτήρων και τη βαθιά κοινωνική παρατήρηση, εξερευνώντας τα όρια της δικαιοσύνης, της ατομικής ευθύνης και των ηθικών διλημμάτων που αντιμετωπίζει ο άνθρωπος σήμερα.
+                    </p>
+                    <p>
+                        Το πρώτο του βιβλίο, με τίτλο <em>«Stella Marina»</em>, κυκλοφορεί από τις <strong>Εκδόσεις ΔΕΡΕ</strong>.
+                    </p>
+                    <p style="font-style: italic; color: var(--text-muted);">
+                        Όταν δεν γράφει, αφιερώνει τον χρόνο του στην πειθαρχία της φυσικής κατάστασης και το τρέξιμο — μια διαδικασία που, όπως και η συγγραφή, απαιτεί αφοσίωση, αντοχή και καθαρό νου.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Επικοινωνια</span>
+                <h2 class="section-title">Στείλτε Μήνυμα</h2>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-card">
+                    <!-- Φόρμα Επικοινωνίας με Web3Forms -->
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <!-- Αντικαταστήστε το ACCESS_KEY με το δικό σας κλειδί από το web3forms.com -->
+                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                        <input type="hidden" name="subject" value="Νέο μήνυμα από την ιστοσελίδα συγγραφέα">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                        <div class="form-group">
+                            <label for="name">Ονοματεπώνυμο</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Το όνομά σας" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Επικοινωνίας</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="yourname@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject_text">Θέμα</label>
+                            <input type="text" id="subject_text" name="subject_title" class="form-control" placeholder="Π.χ. Αγορά βιβλίου / Εκδήλωση / Σχόλιο">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Μήνυμα</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Γράψτε το μήνυμά σας εδώ..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Αποστολη Μηνυματος</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Βασίλειος Γεωργιάδης</div>
+            <ul class="footer-links">
+                <li><a href="#home">Αρχικη</a></li>
+                <li><a href="#book">Stella Marina</a></li>
+                <li><a href="#author">Ο Συγγραφεας</a></li>
+                <li><a href="#contact">Επικοινωνια</a></li>
+            </ul>
+            <p class="copyright">
+                © 2026 Βασίλειος Γεωργιάδης. Όλα τα δικαιώματα διατηρούνται. | Εκδόσεις ΔΕΡΕ
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("File index.html created successfully.")
